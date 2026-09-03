@@ -1,0 +1,976 @@
+/* ============================================================
+   KYHABER
+   RESPONSIVE STYLE
+============================================================ */
+
+
+/* ============================================================
+   TABLET
+============================================================ */
+
+@media (max-width: 1050px) {
+
+    /* --------------------------------------------------------
+       HEADER
+    -------------------------------------------------------- */
+
+    .header-inner {
+
+        flex-wrap:
+            wrap;
+
+        padding-block:
+            14px;
+    }
+
+
+    .location-search {
+
+        width:
+            220px;
+    }
+
+
+    .news-search {
+
+        flex:
+            1;
+
+        width:
+            auto;
+
+        min-width:
+            180px;
+    }
+
+
+    .header-actions {
+
+        width:
+            100%;
+
+        margin-left:
+            0;
+
+        justify-content:
+            flex-start;
+
+        overflow-x:
+            auto;
+
+        padding-bottom:
+            3px;
+
+        scrollbar-width:
+            none;
+    }
+
+
+    .header-actions::-webkit-scrollbar {
+
+        display:
+            none;
+    }
+
+
+    .header-action {
+
+        flex-shrink:
+            0;
+    }
+
+
+    /* --------------------------------------------------------
+       CATEGORY
+    -------------------------------------------------------- */
+
+    .category-nav {
+
+        position:
+            relative;
+
+        top:
+            0;
+    }
+
+
+    /* --------------------------------------------------------
+       NEWS
+    -------------------------------------------------------- */
+
+    .news-grid {
+
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+    }
+
+
+    /* --------------------------------------------------------
+       HERO
+    -------------------------------------------------------- */
+
+    .hero {
+
+        min-height:
+            470px;
+    }
+
+
+    /*
+       Hero yazısı navbar container'ı ile
+       birebir aynı sol hizada başlar.
+    */
+
+    .hero-content {
+
+        max-width:
+            700px;
+
+        padding-left:
+            0 !important;
+
+        padding-right:
+            0 !important;
+    }
+
+
+    .hero h1 {
+
+        font-size:
+            70px;
+    }
+
+
+    .hero-world {
+
+        width:
+            440px;
+
+        height:
+            440px;
+
+        right:
+            -100px;
+    }
+}
+
+
+/* ============================================================
+   SMALL TABLET
+============================================================ */
+
+@media (max-width: 800px) {
+
+    /* --------------------------------------------------------
+       SEARCH
+    -------------------------------------------------------- */
+
+    .location-search,
+    .news-search {
+
+        width:
+            100%;
+
+        flex:
+            1;
+
+        min-width:
+            0;
+    }
+
+
+    .header-actions {
+
+        justify-content:
+            flex-start;
+    }
+
+
+    .header-action {
+
+        flex-shrink:
+            0;
+    }
+
+
+    /* --------------------------------------------------------
+       HERO
+    -------------------------------------------------------- */
+
+    .hero {
+
+        min-height:
+            500px;
+    }
+
+
+    .hero-content {
+
+        max-width:
+            650px;
+
+        padding-left:
+            0 !important;
+
+        padding-right:
+            0 !important;
+    }
+
+
+    .hero-world {
+
+        width:
+            390px;
+
+        height:
+            390px;
+
+        right:
+            -120px;
+
+        opacity:
+            0.72;
+    }
+
+
+    /* --------------------------------------------------------
+       FINANCE
+    -------------------------------------------------------- */
+
+    .finance-content {
+
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+    }
+
+
+    .finance-item {
+
+        min-height:
+            65px;
+
+        border-bottom:
+            1px solid var(--border);
+    }
+
+
+    .finance-item:nth-child(even) {
+
+        border-right:
+            0;
+    }
+
+
+    .finance-item:nth-child(3),
+    .finance-item:nth-child(4) {
+
+        border-bottom:
+            0;
+    }
+}
+
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 600px) {
+
+    /* --------------------------------------------------------
+       CONTAINER
+    -------------------------------------------------------- */
+
+    .container {
+
+        width:
+            min(
+                calc(100% - 24px),
+                var(--container)
+            );
+    }
+
+
+    /* --------------------------------------------------------
+       HEADER
+    -------------------------------------------------------- */
+
+    .header {
+
+        position:
+            relative;
+    }
+
+
+    .header-inner {
+
+        gap:
+            12px;
+
+        padding-block:
+            14px;
+    }
+
+
+    /* --------------------------------------------------------
+       LOGO
+    -------------------------------------------------------- */
+
+    .logo {
+
+        width:
+            100%;
+
+        font-size:
+            24px;
+    }
+
+
+    .logo-mark {
+
+        width:
+            32px;
+
+        height:
+            32px;
+    }
+
+
+    /* --------------------------------------------------------
+       SEARCH
+    -------------------------------------------------------- */
+
+    .location-search,
+    .news-search {
+
+        width:
+            100%;
+
+        flex:
+            none;
+    }
+
+
+    .location-search input,
+    .news-search input {
+
+        height:
+            44px;
+
+        padding-left:
+            42px;
+
+        padding-right:
+            72px;
+    }
+
+
+    .location-search > .search-icon,
+    .news-search > .search-icon {
+
+        left:
+            15px;
+    }
+
+
+    /* --------------------------------------------------------
+       CLEAR BUTTONS
+    -------------------------------------------------------- */
+
+    .clear-search-button {
+
+        width:
+            30px;
+
+        height:
+            30px;
+
+        right:
+            8px;
+    }
+
+
+    #clearNewsSearch {
+
+        right:
+            8px;
+    }
+
+
+    #clearCitySearch {
+
+        right:
+            40px;
+    }
+
+
+    #favoriteCityToggle {
+
+        right:
+            8px;
+    }
+
+
+    /* --------------------------------------------------------
+       HEADER ACTIONS
+    -------------------------------------------------------- */
+
+    .header-actions {
+
+        width:
+            100%;
+
+        justify-content:
+            flex-start;
+
+        gap:
+            6px;
+
+        overflow-x:
+            auto;
+
+        padding-bottom:
+            3px;
+
+        scrollbar-width:
+            none;
+    }
+
+
+    .header-actions::-webkit-scrollbar {
+
+        display:
+            none;
+    }
+
+
+    .header-action {
+
+        flex-shrink:
+            0;
+
+        min-height:
+            38px;
+
+        padding:
+            0 9px;
+    }
+
+
+    .action-label {
+
+        font-size:
+            11px;
+    }
+
+
+    .font-size-control {
+
+        flex-shrink:
+            0;
+    }
+
+
+    .theme-toggle {
+
+        flex-shrink:
+            0;
+    }
+
+
+    /* --------------------------------------------------------
+       CATEGORY
+    -------------------------------------------------------- */
+
+    .category-nav {
+
+        position:
+            relative;
+
+        top:
+            0;
+    }
+
+
+    .category-container {
+
+        min-height:
+            56px;
+
+        padding-block:
+            8px;
+
+        justify-content:
+            flex-start;
+    }
+
+
+    .category-btn {
+
+        padding:
+            8px 14px;
+
+        font-size:
+            12px;
+    }
+
+
+    /* --------------------------------------------------------
+       HERO
+    -------------------------------------------------------- */
+
+    .hero {
+
+        min-height:
+            550px;
+    }
+
+
+    .hero-content {
+
+        width:
+            100%;
+
+        max-width:
+            100%;
+
+        padding-top:
+            70px;
+
+        padding-bottom:
+            70px;
+
+        /*
+           Navbar ve hero aynı container çizgisinde.
+           Ekstra yatay boşluk yok.
+        */
+
+        padding-left:
+            0 !important;
+
+        padding-right:
+            0 !important;
+    }
+
+
+    .hero-kicker {
+
+        font-size:
+            10px;
+
+        letter-spacing:
+            2px;
+    }
+
+
+    .hero h1 {
+
+        font-size:
+            48px;
+
+        letter-spacing:
+            -3px;
+    }
+
+
+    .hero-description {
+
+        max-width:
+            360px;
+
+        font-size:
+            15px;
+    }
+
+
+    .hero-world {
+
+        width:
+            320px;
+
+        height:
+            320px;
+
+        right:
+            -115px;
+
+        top:
+            62%;
+
+        opacity:
+            0.55;
+    }
+
+
+    /* --------------------------------------------------------
+       FINANCE
+    -------------------------------------------------------- */
+
+    .finance-content {
+
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+    }
+
+
+    .finance-item {
+
+        min-height:
+            58px;
+
+        padding:
+            0 15px;
+    }
+
+
+    .finance-item:nth-child(even) {
+
+        border-right:
+            0;
+    }
+
+
+    .finance-info strong {
+
+        font-size:
+            17px;
+    }
+
+
+    .finance-value {
+
+        min-width:
+            0;
+    }
+
+
+    .finance-change {
+
+        min-width:
+            auto;
+
+        padding-inline:
+            5px;
+    }
+
+
+    /* --------------------------------------------------------
+       MAIN
+    -------------------------------------------------------- */
+
+    .main-content {
+
+        padding-top:
+            50px;
+
+        padding-bottom:
+            70px;
+    }
+
+
+    /* --------------------------------------------------------
+       SECTION HEADER
+    -------------------------------------------------------- */
+
+    .section-header {
+
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+
+        gap:
+            12px;
+    }
+
+
+    .section-header h2 {
+
+        font-size:
+            34px;
+
+        letter-spacing:
+            -1.5px;
+    }
+
+
+    .filter-actions {
+
+        justify-content:
+            flex-start;
+
+        width:
+            100%;
+    }
+
+
+    /* --------------------------------------------------------
+       NEWS
+    -------------------------------------------------------- */
+
+    .news-grid {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            18px;
+    }
+
+
+    .news-image-wrapper {
+
+        height:
+            220px;
+    }
+
+
+    .news-title {
+
+        font-size:
+            21px;
+    }
+
+
+    .news-actions {
+
+        flex-wrap:
+            wrap;
+    }
+
+
+    /* --------------------------------------------------------
+       FOOTER
+    -------------------------------------------------------- */
+
+    .footer .container {
+
+        min-height:
+            70px;
+
+        text-align:
+            center;
+
+        flex-direction:
+            column;
+
+        justify-content:
+            center;
+
+        gap:
+            4px;
+    }
+}
+
+
+/* ============================================================
+   VERY SMALL MOBILE
+============================================================ */
+
+@media (max-width: 380px) {
+
+    /* --------------------------------------------------------
+       HERO
+    -------------------------------------------------------- */
+
+    .hero h1 {
+
+        font-size:
+            42px;
+    }
+
+
+    .hero-content {
+
+        padding-left:
+            0 !important;
+
+        padding-right:
+            0 !important;
+    }
+
+
+    .hero-world {
+
+        width:
+            280px;
+
+        height:
+            280px;
+
+        right:
+            -110px;
+
+        top:
+            63%;
+
+        opacity:
+            0.45;
+    }
+
+
+    /* --------------------------------------------------------
+       SECTION
+    -------------------------------------------------------- */
+
+    .section-header h2 {
+
+        font-size:
+            30px;
+    }
+
+
+    /* --------------------------------------------------------
+       HEADER
+    -------------------------------------------------------- */
+
+    .header-action .action-label {
+
+        display:
+            none;
+    }
+
+
+    .header-action {
+
+        justify-content:
+            center;
+    }
+
+
+    /* --------------------------------------------------------
+       NEWS IMAGE
+    -------------------------------------------------------- */
+
+    .news-image-wrapper {
+
+        height:
+            200px;
+    }
+
+
+    .news-content {
+
+        padding:
+            17px;
+    }
+
+
+    .news-title {
+
+        font-size:
+            19px;
+    }
+
+
+    /* --------------------------------------------------------
+       SEARCH
+    -------------------------------------------------------- */
+
+    .location-search input,
+    .news-search input {
+
+        padding-left:
+            40px;
+
+        padding-right:
+            68px;
+    }
+
+
+    .location-search > .search-icon,
+    .news-search > .search-icon {
+
+        left:
+            14px;
+    }
+
+
+    #clearNewsSearch {
+
+        right:
+            6px;
+    }
+
+
+    #clearCitySearch {
+
+        right:
+            38px;
+    }
+
+
+    #favoriteCityToggle {
+
+        right:
+            6px;
+    }
+}
+
+
+/* ============================================================
+   EXTRA SMALL WIDTH
+============================================================ */
+
+@media (max-width: 320px) {
+
+    .container {
+
+        width:
+            calc(100% - 18px);
+    }
+
+
+    .hero h1 {
+
+        font-size:
+            38px;
+    }
+
+
+    .hero-kicker {
+
+        font-size:
+            9px;
+
+        letter-spacing:
+            1.5px;
+    }
+
+
+    .hero-description {
+
+        font-size:
+            14px;
+    }
+
+
+    .finance-item {
+
+        padding-inline:
+            10px;
+    }
+
+
+    .finance-info strong {
+
+        font-size:
+            15px;
+    }
+
+
+    .news-image-wrapper {
+
+        height:
+            185px;
+    }
+}

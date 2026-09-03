@@ -1,0 +1,15 @@
+node_modules/
+dist/
+build/
+
+.env
+.env.*
+!.env.example
+
+*.local
+js/config.local.js
+
+.DS_Store
+Thumbs.db
+
+*.zip

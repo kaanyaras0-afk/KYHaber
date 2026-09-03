@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="KYHaber - Türkiye ve dünyadan güncel haberler."
+    >
+
+    <meta
+        name="theme-color"
+        content="#0b0b0d"
+    >
+
+    <title>KYHaber | Güncel Haberler</title>
+
+
+    <!-- Google Fonts -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- Font Awesome -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+
+    <!-- CSS -->
+
+    <link
+        rel="stylesheet"
+        href="./css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./css/responsive.css"
+    >
+
+</head>
+
+
+<body
+    data-theme="dark"
+    data-font-size="normal"
+>
+
+
+    <!-- ==================================================
+         HEADER
+    ================================================== -->
+
+    <header class="header">
+
+        <div class="container header-inner">
+
+
+            <!-- LOGO -->
+
+            <a
+                href="#"
+                class="logo"
+                aria-label="KYHaber ana sayfa"
+            >
+
+                <span class="logo-mark">
+                    KY
+                </span>
+
+                <span class="logo-text">
+                    KY<span>HABER</span>
+                </span>
+
+            </a>
+
+
+            <!-- ==================================================
+                 ŞEHİR ARAMA
+            ================================================== -->
+
+            <div class="location-search">
+
+                <i
+                    class="fa-solid fa-location-dot search-icon"
+                    aria-hidden="true"
+                ></i>
+
+
+                <input
+                    type="text"
+                    id="citySearch"
+                    placeholder="Şehir ara..."
+                    autocomplete="off"
+                    aria-label="Şehir ara"
+                    aria-controls="citySuggestions"
+                    aria-expanded="false"
+                >
+
+
+                <button
+                    type="button"
+                    id="clearCitySearch"
+                    class="clear-search-button"
+                    aria-label="Şehir aramasını temizle"
+                    title="Temizle"
+                    hidden
+                >
+
+                    <i
+                        class="fa-solid fa-xmark"
+                        aria-hidden="true"
+                    ></i>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    id="favoriteCityToggle"
+                    class="favorite-city-button"
+                    aria-label="Şehri favorilere ekle"
+                    aria-pressed="false"
+                    title="Favori şehir"
+                >
+
+                    <i
+                        class="fa-regular fa-star"
+                        aria-hidden="true"
+                    ></i>
+
+                </button>
+
+
+                <div
+                    id="citySuggestions"
+                    class="city-suggestions"
+                    role="listbox"
+                    aria-label="Şehir önerileri"
+                ></div>
+
+            </div>
+
+
+            <!-- ==================================================
+                 HABER ARAMA
+            ================================================== -->
+
+            <div class="news-search">
+
+                <i
+                    class="fa-solid fa-magnifying-glass search-icon"
+                    aria-hidden="true"
+                ></i>
+
+
+                <input
+                    type="search"
+                    id="newsSearch"
+                    placeholder="Haberlerde ara..."
+                    autocomplete="off"
+                    aria-label="Haberlerde ara"
+                >
+
+
+                <button
+                    type="button"
+                    id="clearNewsSearch"
+                    class="clear-search-button"
+                    aria-label="Haber aramasını temizle"
+                    title="Temizle"
+                    hidden
+                >
+
+                    <i
+                        class="fa-solid fa-xmark"
+                        aria-hidden="true"
+                    ></i>
+
+                </button>
+
+            </div>
+
+
+            <!-- ==================================================
+                 HEADER ACTIONS
+            ================================================== -->
+
+            <div class="header-actions">
+
+
+                <button
+                    type="button"
+                    id="favoritesToggle"
+                    class="header-action"
+                    aria-pressed="false"
+                >
+
+                    <span class="action-icon">
+
+                        <i
+                            class="fa-regular fa-heart"
+                            aria-hidden="true"
+                        ></i>
+
+                        <span
+                            id="favoriteCount"
+                            class="action-count"
+                        >
+                            0
+                        </span>
+
+                    </span>
+
+                    <span class="action-label">
+                        Favoriler
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    id="unreadToggle"
+                    class="header-action"
+                    aria-pressed="false"
+                >
+
+                    <span class="action-icon">
+
+                        <i
+                            class="fa-regular fa-envelope"
+                            aria-hidden="true"
+                        ></i>
+
+                        <span
+                            id="unreadCount"
+                            class="action-count"
+                        >
+                            0
+                        </span>
+
+                    </span>
+
+                    <span class="action-label">
+                        Okunmamış
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    id="readingListToggle"
+                    class="header-action"
+                    aria-pressed="false"
+                >
+
+                    <span class="action-icon">
+
+                        <i
+                            class="fa-regular fa-bookmark"
+                            aria-hidden="true"
+                        ></i>
+
+                        <span
+                            id="readingListCount"
+                            class="action-count"
+                        >
+                            0
+                        </span>
+
+                    </span>
+
+                    <span class="action-label">
+                        Okuma Listesi
+                    </span>
+
+                </button>
+
+
+                <!-- FONT SIZE -->
+
+                <div
+                    class="font-size-control"
+                    role="group"
+                    aria-label="Yazı boyutu"
+                >
+
+                    <button
+                        type="button"
+                        id="fontSizeSmall"
+                        class="font-size-button"
+                        aria-label="Küçük yazı"
+                        aria-pressed="false"
+                        title="Küçük"
+                    >
+                        A
+                    </button>
+
+                    <button
+                        type="button"
+                        id="fontSizeNormal"
+                        class="font-size-button active"
+                        aria-label="Normal yazı"
+                        aria-pressed="true"
+                        title="Normal"
+                    >
+                        A
+                    </button>
+
+                    <button
+                        type="button"
+                        id="fontSizeLarge"
+                        class="font-size-button"
+                        aria-label="Büyük yazı"
+                        aria-pressed="false"
+                        title="Büyük"
+                    >
+                        A
+                    </button>
+
+                </div>
+
+
+                <!-- THEME -->
+
+                <button
+                    type="button"
+                    id="themeToggle"
+                    class="theme-toggle"
+                    aria-label="Temayı değiştir"
+                    title="Tema değiştir"
+                    aria-pressed="false"
+                >
+
+                    <i
+                        class="fa-solid fa-moon"
+                        aria-hidden="true"
+                    ></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ==================================================
+         HERO
+    ================================================== -->
+
+    <section class="hero">
+
+        <div class="container hero-content">
+
+            <span class="hero-kicker">
+                TÜRKİYE'NİN HABER PLATFORMU
+            </span>
+
+            <h1>
+                KY
+                <span>HABER</span>
+            </h1>
+
+            <p class="hero-description">
+                Türkiye ve dünyadan gelişmeleri,
+                tek bir yerde takip et.
+            </p>
+
+        </div>
+
+
+        <!-- ==================================================
+             3D WORLD
+        ================================================== -->
+
+        <div
+            id="heroWorld"
+            class="hero-world"
+            aria-hidden="true"
+        >
+
+            <canvas
+                id="worldCanvas"
+                class="world-canvas"
+            ></canvas>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================================================
+         CATEGORY NAVIGATION
+    ================================================== -->
+
+    <nav
+        class="category-nav"
+        aria-label="Haber kategorileri"
+    >
+
+        <div class="container category-container"></div>
+
+    </nav>
+
+
+    <!-- ==================================================
+         FINANCE BAR
+    ================================================== -->
+
+    <section
+        class="finance-bar"
+        aria-label="Piyasa verileri"
+    >
+
+        <div class="container finance-content">
+
+
+            <div
+                class="finance-item"
+                data-finance="dolar"
+            >
+
+                <div class="finance-info">
+
+                    <span>DOLAR</span>
+
+                    <strong>...</strong>
+
+                </div>
+
+                <div class="finance-value">
+
+                    <span class="finance-change">
+                        ...
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="finance-item"
+                data-finance="euro"
+            >
+
+                <div class="finance-info">
+
+                    <span>EURO</span>
+
+                    <strong>...</strong>
+
+                </div>
+
+                <div class="finance-value">
+
+                    <span class="finance-change">
+                        ...
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="finance-item"
+                data-finance="altin"
+            >
+
+                <div class="finance-info">
+
+                    <span>ALTIN</span>
+
+                    <strong>...</strong>
+
+                </div>
+
+                <div class="finance-value">
+
+                    <span class="finance-change">
+                        ...
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="finance-item"
+                data-finance="bist"
+            >
+
+                <div class="finance-info">
+
+                    <span>BIST</span>
+
+                    <strong>...</strong>
+
+                </div>
+
+                <div class="finance-value">
+
+                    <span class="finance-change">
+                        ...
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <p
+            class="finance-updated"
+            id="financeUpdated"
+            aria-live="polite"
+        ></p>
+
+    </section>
+
+
+    <!-- ==================================================
+         MAIN
+    ================================================== -->
+
+    <main class="main-content">
+
+        <div class="container">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <span
+                        id="sectionLabel"
+                        class="section-label"
+                    >
+                        SON HABERLER
+                    </span>
+
+                    <h2 id="sectionTitle">
+                        Güncel Haberler
+                    </h2>
+
+                    <span
+                        id="newsCount"
+                        class="news-count"
+                    >
+                        0 haber
+                    </span>
+
+                </div>
+
+
+                <div class="filter-actions">
+
+                    <button
+                        type="button"
+                        id="favoriteCategoryToggle"
+                        class="favorite-filter-button"
+                        aria-pressed="false"
+                    >
+
+                        <i
+                            class="fa-regular fa-star"
+                            aria-hidden="true"
+                        ></i>
+
+                        Favori Kategori
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <section
+                id="newsContainer"
+                class="news-grid"
+                aria-live="polite"
+                aria-busy="false"
+                aria-label="Haberler"
+            ></section>
+
+
+            <div
+                id="emptyState"
+                class="empty-state hidden"
+                role="status"
+                aria-live="polite"
+            >
+
+                <div class="empty-icon">
+
+                    <i
+                        class="fa-regular fa-newspaper"
+                        aria-hidden="true"
+                    ></i>
+
+                </div>
+
+                <h3>
+                    Haber bulunamadı
+                </h3>
+
+                <p>
+                    Seçtiğin filtrelere uygun
+                    herhangi bir haber bulunamadı.
+                </p>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- ==================================================
+         FOOTER
+    ================================================== -->
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <span>
+                © 2026 KYHaber
+            </span>
+
+            <span>
+                Güncel haberler, tek platformda.
+            </span>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ==================================================
+         JAVASCRIPT
+    ================================================== -->
+
+    <script src="./js/config.js"></script>
+
+    <script
+        type="module"
+        src="./js/world.js"
+    ></script>
+
+    <script
+        type="module"
+        src="./js/app.js"
+    ></script>
+
+</body>
+
+</html>
