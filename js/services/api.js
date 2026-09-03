@@ -9,8 +9,10 @@
 
 const API_CONFIG = {
 
+    // Haberler artık doğrudan NewsData.io'ya gitmez.
+    // Cloudflare Worker üzerinden alınır.
     baseUrl:
-        "https://newsdata.io/api/1",
+        "https://kyhaber-finans-proxy.kaanyaras0.workers.dev",
 
     timeout:
         10000,
@@ -28,24 +30,6 @@ const API_CONFIG = {
         30
 
 };
-
-
-// ============================================================
-// API KEY
-// ============================================================
-
-const CONFIG =
-    window.KYHABER_CONFIG ||
-    window.HABERX_CONFIG ||
-    {};
-
-
-const API_KEY =
-    CONFIG.newsApiKey ||
-    CONFIG.newsDataApiKey ||
-    CONFIG.apiKey ||
-    CONFIG.api_key ||
-    "";
 
 
 // ============================================================
@@ -416,10 +400,6 @@ function apiKategorisiniDonustur(
 
 ) {
 
-    // --------------------------------------------------------
-    // KATEGORİ SEÇİLDİYSE
-    // --------------------------------------------------------
-
     if (
 
         istenenKategori &&
@@ -434,10 +414,6 @@ function apiKategorisiniDonustur(
 
     }
 
-
-    // --------------------------------------------------------
-    // API KATEGORİSİNİ OKU
-    // --------------------------------------------------------
 
     if (
         !Array.isArray(kategoriKodlari)
@@ -772,47 +748,23 @@ function haberApiUrlOlustur({
 
 } = {}) {
 
-
-    if (!API_KEY) {
-
-        throw new Error(
-            "NewsData API anahtarı bulunamadı. config.js içindeki newsApiKey değerini kontrol et."
-        );
-
-    }
-
-
     const params =
         new URLSearchParams();
 
 
-    // API KEY
+    // ========================================================
+    // CLOUDFLARE WORKER
+    // ========================================================
 
     params.set(
-        "apikey",
-        API_KEY
+        "return",
+        "news"
     );
 
 
-    // TÜRKİYE
-
-    params.set(
-        "country",
-        "tr"
-    );
-
-
-    // TÜRKÇE
-
-    params.set(
-        "language",
-        "tr"
-    );
-
-
-    // --------------------------------------------------------
+    // ========================================================
     // KATEGORİ
-    // --------------------------------------------------------
+    // ========================================================
 
     const apiKategori =
         kategoriMap[kategori];
@@ -828,9 +780,9 @@ function haberApiUrlOlustur({
     }
 
 
-    // --------------------------------------------------------
+    // ========================================================
     // ARAMA
-    // --------------------------------------------------------
+    // ========================================================
 
     const temizIl =
 
@@ -877,9 +829,9 @@ function haberApiUrlOlustur({
     }
 
 
-    // --------------------------------------------------------
+    // ========================================================
     // PAGINATION
-    // --------------------------------------------------------
+    // ========================================================
 
     if (page) {
 
@@ -893,7 +845,7 @@ function haberApiUrlOlustur({
 
     return (
 
-        `${API_CONFIG.baseUrl}/latest?` +
+        `${API_CONFIG.baseUrl}?` +
 
         params.toString()
 
@@ -983,6 +935,8 @@ async function apiIstegiYap(url) {
 
                 data?.message ||
 
+                data?.hata ||
+
                 `HTTP ${response.status}`;
 
 
@@ -1003,6 +957,8 @@ async function apiIstegiYap(url) {
                 data?.results?.message ||
 
                 data?.message ||
+
+                data?.hata ||
 
                 "NewsData API hata döndürdü."
 
@@ -1142,10 +1098,6 @@ function newsDataHaberiDonustur(
     }
 
 
-    // --------------------------------------------------------
-    // API KATEGORİLERİ
-    // --------------------------------------------------------
-
     const kategoriKodlari =
 
         Array.isArray(
@@ -1167,10 +1119,6 @@ function newsDataHaberiDonustur(
 
         );
 
-
-    // --------------------------------------------------------
-    // SENTIMENT
-    // --------------------------------------------------------
 
     const sentiment =
 
@@ -1204,19 +1152,11 @@ function newsDataHaberiDonustur(
     }
 
 
-    // --------------------------------------------------------
-    // ID
-    // --------------------------------------------------------
-
     const id =
         kararliHaberIdOlustur(
             haber
         );
 
-
-    // --------------------------------------------------------
-    // HABER OBJESİ
-    // --------------------------------------------------------
 
     return {
 
@@ -1281,10 +1221,6 @@ function newsDataHaberiDonustur(
 
         },
 
-
-        // ----------------------------------------------------
-        // ORİJİNAL API VERİSİ
-        // ----------------------------------------------------
 
         apiData: {
 
@@ -1421,10 +1357,6 @@ async function newsDataHaberleriGetir(
         null;
 
 
-    // --------------------------------------------------------
-    // SAYFALARI GETİR
-    // --------------------------------------------------------
-
     for (
 
         let sayfa = 0;
@@ -1460,10 +1392,6 @@ async function newsDataHaberleriGetir(
 
                 : [];
 
-
-        // ----------------------------------------------------
-        // HABERLERİ DÖNÜŞTÜR
-        // ----------------------------------------------------
 
         results.forEach(
 
@@ -1514,10 +1442,6 @@ async function newsDataHaberleriGetir(
         );
 
 
-        // ----------------------------------------------------
-        // 30 HABERE ULAŞTIYSAK DUR
-        // ----------------------------------------------------
-
         if (
             haberler.length >=
             API_CONFIG.maxNews
@@ -1527,10 +1451,6 @@ async function newsDataHaberleriGetir(
 
         }
 
-
-        // ----------------------------------------------------
-        // NEXT PAGE
-        // ----------------------------------------------------
 
         const sonrakiSayfa =
             response?.nextPage;
@@ -1605,10 +1525,6 @@ async function sehirHaberleriniGetir(
         new Set();
 
 
-    // --------------------------------------------------------
-    // İLK ŞEHİR SORGUSU
-    // --------------------------------------------------------
-
     try {
 
         const direct =
@@ -1673,10 +1589,6 @@ async function sehirHaberleriniGetir(
 
     }
 
-
-    // --------------------------------------------------------
-    // ALTERNATİF ŞEHİR İSİMLERİ
-    // --------------------------------------------------------
 
     for (
 
@@ -1799,10 +1711,6 @@ async function haberleriGetir(
         options;
 
 
-    // --------------------------------------------------------
-    // ŞEHİR SEÇİLDİYSE
-    // --------------------------------------------------------
-
     if (il) {
 
         return sehirHaberleriniGetir({
@@ -1817,10 +1725,6 @@ async function haberleriGetir(
 
     }
 
-
-    // --------------------------------------------------------
-    // API'DEN GERÇEK HABERLER
-    // --------------------------------------------------------
 
     try {
 
@@ -1861,10 +1765,6 @@ async function haberleriGetir(
 
     }
 
-
-    // --------------------------------------------------------
-    // API SONUÇ VERMEZSE MOCK
-    // --------------------------------------------------------
 
     return MOCK_HABERLER.filter(
 
@@ -2027,12 +1927,6 @@ function haberKaynakGetir(haber) {
 
 const FINANS_CONFIG = {
 
-    // Not: Bu, Midas'ın kendi sitesindeki widget'ı beslediği
-    // resmi olarak dokümante edilmemiş, herkese açık bir
-    // endpoint'tir. Key gerektirmez ama garantili/kalıcı
-    // bir API sözleşmesi değildir; Midas değiştirirse/kapatırsa
-    // bu fonksiyon hata verir ve son bilinen değere düşer.
-
     baseUrl:
         "https://www.getmidas.com/wp-json/midas-api/v1/midas_table_data",
 
@@ -2042,10 +1936,6 @@ const FINANS_CONFIG = {
     cacheKey:
         "kyhaber_finans_cache_v1",
 
-    // BIST endeks verisi mevzuat gereği (KAP/BIST) en az
-    // 15 dakika gecikmeli dağıtılabilir. Döviz ve altın
-    // serbest piyasa/OTC olduğu için bu kısıtlamaya tabi
-    // değildir, dolayısıyla ona göre daha güncel sayılır.
     bistGecikmeDakika:
         15
 
@@ -2061,16 +1951,19 @@ async function finansEndpointGetir(returnTuru) {
     const controller =
         new AbortController();
 
+
     const timeout =
         setTimeout(
             () => controller.abort(),
             FINANS_CONFIG.timeout
         );
 
+
     try {
 
         const url =
             `${FINANS_CONFIG.baseUrl}?sortId=&return=${returnTuru}`;
+
 
         const response =
             await fetch(
@@ -2078,8 +1971,10 @@ async function finansEndpointGetir(returnTuru) {
                 {
                     method:
                         "GET",
+
                     signal:
                         controller.signal,
+
                     headers: {
                         Accept:
                             "application/json"
@@ -2139,10 +2034,12 @@ function finansKaydiBul(liste, eslesenler) {
                 kayit?.Code || ""
             ).toUpperCase();
 
+
         const isim =
             String(
                 kayit?.Name || ""
             ).toUpperCase();
+
 
         return eslesenler.some(
             aranan =>
@@ -2156,13 +2053,10 @@ function finansKaydiBul(liste, eslesenler) {
 
 
 // ============================================================
-// FİNANS — GRAM ALTIN KAYDINI BUL (AYAR/BİLEZİK KARIŞMASIN)
+// FİNANS — GRAM ALTIN KAYDINI BUL
 // ============================================================
 
 function finansGramAltinKaydiBul(liste) {
-
-    // Önce tam olarak "ALTIN (GRAM)" adını arıyoruz —
-    // bu, 24 ayar saf gram altını temsil eder.
 
     const tamEslesme =
         liste.find(kayit => {
@@ -2172,21 +2066,26 @@ function finansGramAltinKaydiBul(liste) {
                     kayit?.Name || ""
                 ).toUpperCase();
 
+
             return (
-                isim === "ALTIN (GRAM)" ||
-                isim === "GRAM ALTIN"
+
+                isim ===
+                "ALTIN (GRAM)" ||
+
+                isim ===
+                "GRAM ALTIN"
+
             );
 
         });
 
 
     if (tamEslesme) {
+
         return tamEslesme;
+
     }
 
-
-    // Bulunamazsa: "GRAM" geçen ama ayar/bilezik
-    // olmayan bir kayda düş.
 
     return liste.find(kayit => {
 
@@ -2195,14 +2094,22 @@ function finansGramAltinKaydiBul(liste) {
                 kayit?.Name || ""
             ).toUpperCase();
 
+
         const ayarVeyaBilezikMi =
+
             isim.includes("AYAR") ||
+
             isim.includes("BİLEZİK") ||
+
             isim.includes("BILEZIK");
 
+
         return (
+
             isim.includes("GRAM") &&
+
             !ayarVeyaBilezikMi
+
         );
 
     }) || null;
@@ -2217,9 +2124,15 @@ function finansGramAltinKaydiBul(liste) {
 function finansKaydiDonustur(kayit, sembol) {
 
     if (
+
         !kayit ||
+
         typeof kayit.Last !== "number" ||
-        !Number.isFinite(kayit.Last)
+
+        !Number.isFinite(
+            kayit.Last
+        )
+
     ) {
 
         return null;
@@ -2228,8 +2141,12 @@ function finansKaydiDonustur(kayit, sembol) {
 
 
     const degisim =
-        typeof kayit.DailyChangePercent === "number"
+
+        typeof kayit.DailyChangePercent ===
+        "number"
+
             ? kayit.DailyChangePercent
+
             : 0;
 
 
@@ -2243,10 +2160,15 @@ function finansKaydiDonustur(kayit, sembol) {
         degisim,
 
         yon:
+
             degisim > 0
+
                 ? "up"
+
                 : degisim < 0
+
                     ? "down"
+
                     : "neutral"
 
     };
@@ -2263,19 +2185,28 @@ function finansOnbellekYaz(finans) {
     try {
 
         localStorage.setItem(
+
             FINANS_CONFIG.cacheKey,
+
             JSON.stringify({
+
                 finans,
+
                 zaman:
                     Date.now()
+
             })
+
         );
 
     } catch (error) {
 
         console.warn(
+
             "Finans önbelleği yazılamadı:",
+
             error
+
         );
 
     }
@@ -2294,7 +2225,9 @@ function finansOnbellekOku() {
 
 
         if (!ham) {
+
             return null;
+
         }
 
 
@@ -2303,11 +2236,17 @@ function finansOnbellekOku() {
 
 
         if (
+
             !parsed ||
+
             !parsed.finans ||
+
             !parsed.zaman
+
         ) {
+
             return null;
+
         }
 
 
@@ -2331,34 +2270,68 @@ async function finansVerisiniHazirla() {
     try {
 
         const [
+
             doviz,
+
             table,
+
             altin
+
         ] =
+
             await Promise.all([
-                finansEndpointGetir("doviz"),
-                finansEndpointGetir("table"),
-                finansEndpointGetir("altin")
+
+                finansEndpointGetir(
+                    "doviz"
+                ),
+
+                finansEndpointGetir(
+                    "table"
+                ),
+
+                finansEndpointGetir(
+                    "altin"
+                )
+
             ]);
 
 
         const usdKaydi =
             finansKaydiBul(
+
                 doviz,
-                ["USDTRY"]
+
+                [
+                    "USDTRY"
+                ]
+
             );
+
 
         const eurKaydi =
             finansKaydiBul(
+
                 doviz,
-                ["EURTRY"]
+
+                [
+                    "EURTRY"
+                ]
+
             );
+
 
         const bistKaydi =
             finansKaydiBul(
+
                 table,
-                ["XU100", "BIST 100"]
+
+                [
+                    "XU100",
+                    "BIST 100"
+                ]
+
             );
+
 
         const altinKaydi =
             finansGramAltinKaydiBul(
@@ -2369,64 +2342,95 @@ async function finansVerisiniHazirla() {
         const finans = {
 
             dolar:
+
                 finansKaydiDonustur(
+
                     usdKaydi,
+
                     "$"
+
                 ),
 
             euro:
+
                 finansKaydiDonustur(
+
                     eurKaydi,
+
                     "€"
+
                 ),
 
             altin:
+
                 finansKaydiDonustur(
+
                     altinKaydi,
+
                     "₺"
+
                 ),
 
             bist:
+
                 finansKaydiDonustur(
+
                     bistKaydi,
+
                     ""
+
                 )
 
         };
 
 
         const hicVeriYok =
+
             !finans.dolar &&
+
             !finans.euro &&
+
             !finans.altin &&
+
             !finans.bist;
 
 
         if (hicVeriYok) {
 
             throw new Error(
+
                 "Finans kaynağından hiçbir değer ayrıştırılamadı."
+
             );
 
         }
 
 
-        finansOnbellekYaz(finans);
+        finansOnbellekYaz(
+            finans
+        );
 
 
         return {
+
             finans,
+
             kaynak:
                 "canli",
+
             zaman:
                 Date.now()
+
         };
 
     } catch (error) {
 
         console.warn(
+
             "Finans verisi canlı alınamadı, önbellek deneniyor:",
+
             error
+
         );
 
 
@@ -2437,12 +2441,16 @@ async function finansVerisiniHazirla() {
         if (onbellek) {
 
             return {
+
                 finans:
                     onbellek.finans,
+
                 kaynak:
                     "onbellek",
+
                 zaman:
                     onbellek.zaman
+
             };
 
         }
