@@ -1,43 +1,244 @@
-# KYHaber — Modülerleştirilmiş sürüm
+# KYHaber 📰
 
-Bu paket, mevcut Vanilla JavaScript haber uygulamasının ana HTML yapısını,
-CSS sınıflarını ve kullanıcı akışlarını koruyarak düzenlenmiş halidir.
+Modern ve modüler yapıda geliştirilmiş, **Vanilla JavaScript tabanlı haber ve finans platformu.**
 
-## Yapılanlar
+KYHaber; güncel haberleri kategori, şehir ve arama seçenekleriyle sunarken aynı zamanda finans verilerini de tek bir arayüz üzerinden göstermeyi amaçlar.
 
-- `app.js` artık yalnızca uygulamanın giriş noktasıdır.
-- Mevcut uygulama kontrolü `js/features/app/app-controller.js` içine taşındı.
-- DOM yardımcıları `js/core/dom.js` içine ayrıldı.
-- API kodu `js/services/` altında konumlandırıldı.
-- Local storage kodu `js/storage/` altında konumlandırıldı.
-- Veri katalogları `js/data/` altında konumlandırıldı.
-- Haber arayüzü `js/ui/` altında konumlandırıldı.
-- Haber filtreleri `js/features/news/` altında konumlandırıldı.
-- 3D dünya kodu `js/features/world/` altında konumlandırıldı.
-- Eski import yolları için kök seviyede uyumluluk dosyaları bırakıldı.
+## 🌐 Canlı Demo
 
-## Çalıştırma
+**https://kaanyaras0-afk.github.io/KYHaber/**
 
-`index (3).html` dosyasını bir statik sunucu üzerinden açın. Modül importları
-nedeniyle dosyayı doğrudan `file://` ile açmak yerine Live Server benzeri bir
-sunucu kullanın.
+---
 
-API anahtarı güvenlik nedeniyle arşive eklenmemiştir. Anahtar yokken uygulama
-mock haberlerle çalışır. Canlı kullanımda API anahtarını frontend'e eklemeyin;
-NewsData isteklerini backend proxy üzerinden geçirin ve daha önce açığa çıkmış
-anahtarınızı yenileyin.
+## 🚀 Özellikler
 
-## Kademeli sonraki adım
+* 📰 Güncel haberler
+* 🔎 Haber arama
+* 🏙️ Şehir bazlı haberler
+* 🗂️ Haber kategorileri
+* 📄 Sayfalama
+* 💰 Finans verileri
+* 🌍 3D dünya/ülke bölümü
+* ⭐ Favori haberler
+* 📚 Okuma listesi
+* 💾 LocalStorage ile veri saklama
+* 📱 Responsive arayüz
+* ⚡ Vanilla JavaScript
+* 🧩 Modüler JavaScript mimarisi
+* 🔐 API anahtarının frontend'de tutulmaması
 
-`app-controller.js` davranış açısından korunmuştur; bu bilinçli bir karardır.
-Bir sonraki refactor adımında event grupları şu sırayla ayrı feature modüllerine
-taşınabilir:
+---
 
-1. preferences
-2. city-search
-3. news-search
-4. favorites ve reading-list
-5. finance
-6. speech
+## 🛠️ Kullanılan Teknolojiler
 
-Her adımda yalnızca bir özellik taşınarak mevcut ekran ve CSS yapısı korunur.
+* HTML5
+* CSS3
+* JavaScript (ES6+)
+* Bootstrap
+* Font Awesome
+* NewsData.io
+* Cloudflare Workers
+* GitHub Pages
+* LocalStorage
+
+---
+
+## 🏗️ Proje Mimarisi
+
+```text
+KYHaber/
+│
+├── css/
+│
+├── js/
+│   ├── app.js
+│   ├── api.js
+│   ├── data.js
+│   ├── filters.js
+│   ├── world.js
+│   │
+│   ├── core/
+│   │   └── dom.js
+│   │
+│   ├── data/
+│   │   └── catalogs.js
+│   │
+│   ├── features/
+│   │   ├── app/
+│   │   │   └── app-controller.js
+│   │   │
+│   │   ├── news/
+│   │   │   └── filters.js
+│   │   │
+│   │   └── world/
+│   │       └── world.js
+│   │
+│   ├── services/
+│   │   └── api.js
+│   │
+│   ├── storage/
+│   │   └── storage.js
+│   │
+│   └── ui/
+│       └── news-ui.js
+│
+├── index.html
+├── .gitignore
+└── README.md
+```
+
+---
+
+## 🔐 API Güvenliği
+
+KYHaber'in frontend tarafında **NewsData API anahtarı tutulmaz.**
+
+İstek yapısı:
+
+```text
+KYHaber Frontend
+       │
+       ▼
+Cloudflare Worker
+       │
+       │  NEWSDATA_API_KEY
+       │  (Worker Secret)
+       ▼
+NewsData.io
+```
+
+API anahtarı Cloudflare Worker üzerinde **Secret** olarak saklanır.
+
+Frontend yalnızca Worker'a istek gönderir.
+
+Bu sayede API anahtarının GitHub Pages üzerinde kullanıcıya açık şekilde gönderilmesi engellenir.
+
+> Daha önce açığa çıkmış API anahtarlarının güvenlik nedeniyle yenilenmesi önerilir.
+
+---
+
+## 💰 Finans Veri Akışı
+
+Finans verileri de frontend tarafından doğrudan üçüncü taraf servise gönderilmez.
+
+```text
+KYHaber
+   │
+   ▼
+Cloudflare Worker
+   │
+   ▼
+Midas API
+   │
+   ▼
+Finans verileri
+```
+
+Worker üzerinden desteklenen veri türleri:
+
+```text
+doviz
+table
+altin
+news
+```
+
+---
+
+## ⚙️ Cloudflare Worker
+
+KYHaber'in backend/proxy katmanı Cloudflare Workers üzerinde çalışmaktadır.
+
+Worker'ın temel görevleri:
+
+* NewsData API isteklerini yönetmek
+* API anahtarını gizli tutmak
+* Finans API isteklerini yönlendirmek
+* CORS kontrolü yapmak
+* Frontend ile harici API'ler arasında güvenli bir ara katman oluşturmak
+
+Frontend tarafında API anahtarı bulunmaz.
+
+---
+
+## 💻 Lokal Çalıştırma
+
+Projeyi bilgisayarınıza klonlayın:
+
+```bash
+git clone https://github.com/kaanyaras0-afk/KYHaber.git
+```
+
+Proje klasörüne girin:
+
+```bash
+cd KYHaber
+```
+
+Ardından projeyi **Live Server** gibi bir statik sunucu ile çalıştırın.
+
+JavaScript ES Modules kullanıldığı için `index.html` dosyasını doğrudan:
+
+```text
+file://
+```
+
+üzerinden açmak yerine HTTP üzerinden çalıştırmanız gerekir.
+
+Örneğin:
+
+```text
+http://127.0.0.1:5500/
+```
+
+---
+
+## 📦 Veri Yönetimi
+
+Uygulamada tarayıcı tarafında LocalStorage kullanılarak bazı kullanıcı verileri saklanmaktadır.
+
+Örneğin:
+
+* Favoriler
+* Okuma listesi
+* Kullanıcı tercihleri
+* Cache verileri
+
+---
+
+## 📌 Proje Durumu
+
+KYHaber aktif olarak geliştirilmektedir.
+
+Mevcut mimaride temel uygulama yapısı modüllere ayrılmıştır.
+
+Amaç; mevcut kullanıcı deneyimini ve işlevleri korurken kodun sürdürülebilirliğini artırmaktır.
+
+---
+
+## 🔮 Gelecek Geliştirmeler
+
+* Daha gelişmiş haber filtreleme
+* Kullanıcı hesap sistemi
+* Backend tabanlı kullanıcı verileri
+* Daha gelişmiş finans ekranı
+* Performans optimizasyonları
+* Daha kapsamlı hata yönetimi
+* Daha gelişmiş responsive tasarım
+* Test altyapısı
+
+---
+
+## 👨‍💻 Geliştirici
+
+**Kaan Yaraş**
+
+GitHub:
+
+https://github.com/kaanyaras0-afk
+
+---
+
+## 📄 Lisans
+
+Bu proje eğitim, portföy ve geliştirme amacıyla oluşturulmuştur.
