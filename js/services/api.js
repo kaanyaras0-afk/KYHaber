@@ -2579,3 +2579,4 @@ export {
     finansDegisiminiFormatla
 
 };
+
