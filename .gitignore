@@ -13,3 +13,4 @@ js/config.local.js
 Thumbs.db
 
 *.zip
+config.backup.js
