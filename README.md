@@ -4,6 +4,12 @@ Modern ve modüler yapıda geliştirilmiş, **Vanilla JavaScript tabanlı haber 
 
 KYHaber; güncel haberleri kategori, şehir ve arama seçenekleriyle sunarken aynı zamanda finans verilerini de tek bir arayüz üzerinden göstermeyi amaçlar.
 
+## 🤖 Yapay Zekâ Destekli Geliştirme
+
+Bu proje, **Kaan Yaraş tarafından yapay zekâ destekli bir geliştirme süreci kullanılarak** oluşturulmuştur. Yapay zekâ; kod üretimi, inceleme ve hata ayıklama aşamalarında yardımcı olarak kullanılmış; mimari kararlar, kontroller ve son sorumluluk proje sahibine aittir.
+
+---
+
 ## 🌐 Canlı Demo
 
 **https://kaanyaras0-afk.github.io/KYHaber/**
@@ -87,6 +93,8 @@ KYHaber/
 └── README.md
 ```
 
+> Aktif giriş zinciri: index.html → js/app.js → js/features/app/app-controller.js. Haber ve finans servislerinin aktif uygulaması js/services/api.js dosyasındadır. Repodaki bazı kök seviye modül dosyaları eski/uyumluluk dosyaları olarak birlikte tutulmaktadır.
+
 ---
 
 ## 🔐 API Güvenliği
@@ -112,6 +120,8 @@ API anahtarı Cloudflare Worker üzerinde **Secret** olarak saklanır.
 Frontend yalnızca Worker'a istek gönderir.
 
 Bu sayede API anahtarının GitHub Pages üzerinde kullanıcıya açık şekilde gönderilmesi engellenir.
+
+> Not: Worker'ın deploy edilmiş endpoint'i bu projede kullanılır; Worker kaynak kodu ve deploy konfigürasyonu bu repository içinde bulunmamaktadır.
 
 > Daha önce açığa çıkmış API anahtarlarının güvenlik nedeniyle yenilenmesi önerilir.
 
