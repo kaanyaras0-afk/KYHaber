@@ -1928,7 +1928,7 @@ function haberKaynakGetir(haber) {
 const FINANS_CONFIG = {
 
     baseUrl:
-        "https://www.getmidas.com/wp-json/midas-api/v1/midas_table_data",
+        "https://kyhaber-finans-proxy.kaanyaras0.workers.dev",
 
     timeout:
         8000,
@@ -1995,8 +1995,29 @@ async function finansEndpointGetir(returnTuru) {
         }
 
 
-        const data =
+        const rawData =
             await response.json();
+
+
+        let data =
+            rawData;
+
+
+        if (typeof rawData === "string") {
+
+            try {
+
+                data = JSON.parse(rawData);
+
+            } catch {
+
+                throw new Error(
+                    `Finans verisi JSON olarak ayrıştırılamadı (${returnTuru})`
+                );
+
+            }
+
+        }
 
 
         if (!Array.isArray(data)) {
