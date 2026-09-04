@@ -2290,17 +2290,9 @@ async function finansVerisiniHazirla() {
 
     try {
 
-        const [
+        const sonuclar =
 
-            doviz,
-
-            table,
-
-            altin
-
-        ] =
-
-            await Promise.all([
+            await Promise.allSettled([
 
                 finansEndpointGetir(
                     "doviz"
@@ -2315,6 +2307,65 @@ async function finansVerisiniHazirla() {
                 )
 
             ]);
+
+
+        const [
+
+            dovizSonucu,
+
+            tableSonucu,
+
+            altinSonucu
+
+        ] =
+
+            sonuclar;
+
+
+        const veriListesiniGetir =
+
+            (sonuc, isim) => {
+
+                if (sonuc.status === "fulfilled" && Array.isArray(sonuc.value)) {
+
+                    return sonuc.value;
+
+                }
+
+                if (sonuc.status === "rejected") {
+
+                    console.warn(
+                        `Finans ${isim} verisi alınamadı:`,
+                        sonuc.reason
+                    );
+
+                }
+
+                return [];
+
+            };
+
+
+        const doviz =
+
+            veriListesiniGetir(
+                dovizSonucu,
+                "döviz"
+            );
+
+        const table =
+
+            veriListesiniGetir(
+                tableSonucu,
+                "BIST"
+            );
+
+        const altin =
+
+            veriListesiniGetir(
+                altinSonucu,
+                "altın"
+            );
 
 
         const usdKaydi =
