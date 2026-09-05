@@ -3,13 +3,7 @@
 Modern ve modüler yapıda geliştirilmiş, **Vanilla JavaScript tabanlı haber ve finans platformu.**
 
 KYHaber; güncel haberleri kategori, şehir ve arama seçenekleriyle sunarken aynı zamanda finans verilerini de tek bir arayüz üzerinden göstermeyi amaçlar.
-
-## 🤖 Yapay Zekâ Destekli Geliştirme
-
-Bu proje, **Kaan Yaraş tarafından yapay zekâ destekli bir geliştirme süreci kullanılarak** oluşturulmuştur. Yapay zekâ; kod üretimi, inceleme ve hata ayıklama aşamalarında yardımcı olarak kullanılmış; mimari kararlar, kontroller ve son sorumluluk proje sahibine aittir.
-
 ---
-
 ## 🌐 Canlı Demo
 
 **https://kaanyaras0-afk.github.io/KYHaber/**
