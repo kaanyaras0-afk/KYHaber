@@ -174,7 +174,7 @@ async function baslat() {
     fontSizeEventleriniBaslat();
 
 
-    await Promise.all([
+    await Promise.allSettled([
 
         haberleriYukle(),
 
