@@ -151,14 +151,6 @@ yalnızca Worker'a istek gönderir. Bu sayede API anahtarının GitHub Pages
 
 > **Not:** Worker'ın deploy edilmiş endpoint'i bu projede kullanılır; Worker
 > kaynak kodu ve deploy konfigürasyonu bu repository içinde bulunmamaktadır.
-
-> ⚠️ **Güvenlik uyarısı:** Geçmişte bir API anahtarı açığa çıkmıştır. Anahtar
-> şu an hiçbir dosyada bulunmuyor, ancak git geçmişinde hâlâ mevcut olabilir.
-> Eğer o anahtar hâlâ aktifse NewsData/Midas panelinden **yenilenmesi**
-> önerilir; ayrıca repo public olduğu için geçmiş commit'lerden tamamen
-> temizlemek isteyenler `git filter-repo` veya BFG Repo-Cleaner
-> kullanabilir.
-
 ---
 
 ## 💰 Finans Veri Akışı
