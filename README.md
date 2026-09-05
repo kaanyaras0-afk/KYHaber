@@ -151,6 +151,7 @@ yalnızca Worker'a istek gönderir. Bu sayede API anahtarının GitHub Pages
 
 > **Not:** Worker'ın deploy edilmiş endpoint'i bu projede kullanılır; Worker
 > kaynak kodu ve deploy konfigürasyonu bu repository içinde bulunmamaktadır.
+
 ---
 
 ## 💰 Finans Veri Akışı
@@ -252,7 +253,6 @@ saklanmaktadır. Örneğin:
 - **Bilinen teknik borç:** `app-controller.js` amaçlı olarak tek dosyada
   tutuluyor (yukarıdaki mimari bölümüne bakın); kademeli olarak özellik
   klasörlerine bölünecek.
-- **Geçmiş API anahtarı:** Yukarıdaki "API Güvenliği" bölümüne bakın.
 
 ---
 
